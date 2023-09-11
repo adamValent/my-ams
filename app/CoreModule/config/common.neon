@@ -1,0 +1,30 @@
+#
+# Configuration file for CoreModule.
+#
+
+parameters:
+    defaultArticleUrl: 'introduction'  # URL of default article
+    contactEmail: 'admin@localhost.com' # Contact email
+
+services:
+    - App\CoreModule\Model\ArticleManager # Own service accessible via DI.
+    - App\CoreModule\Presenters\ArticlePresenter(%defaultArticleUrl%)
+    - App\CoreModule\Presenters\ContactPresenter(%contactEmail%)
+
+    security.authorizator:
+        setup:
+            # CoreModule resources
+            - addResource(Core:Administration)
+            - addResource(Core:Article)
+            - addResource(Core:Contact)
+
+            # Access rules
+            - allow(guest, Core:Administration, login)
+            - allow(guest, Core:Administration, register)
+            - allow(guest, Core:Article, default)
+            - allow(guest, Core:Article, list)
+            - allow(guest, Core:Contact)
+#            - allow(member, Core:Administration, default)
+#            - allow(member, Core:Administration, logout)
+            - allow(authenticated, Core:Administration, default)
+            - allow(authenticated, Core:Administration, logout)

@@ -1,0 +1,22 @@
+search:
+	-
+		in: %appDir%
+		classes:
+			- *Factory
+			- *Facade
+
+
+services:
+        router: App\Router\RouterFactory::createRouter
+        authenticator: App\Model\UserManager
+        security.authorizator:
+            setup:
+                # Application resources
+                - addResource(Error)
+
+                # Access rules
+                - allow(admin)
+                - allow(guest, Error)
+        - App\Forms\FormFactory
+        - App\Forms\SignInFormFactory
+        - App\Forms\SignUpFormFactory

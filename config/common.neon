@@ -1,0 +1,33 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+#	catchExceptions: true
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+security:
+    roles:
+        guest:
+        authenticated: [guest]
+        admin:
+di:
+	export:
+		parameters: no
+		tags: no
+
+# Connecting with other configuration files.
+includes:
+    - ../app/CoreModule/config/common.neon # Loading configuration from CoreModule
+
+
+forms:
+    # Default setting of error messages.
+    messages:
+        REQUIRED: 'Required field.'
+        EMAIL: 'Invalid email address.'

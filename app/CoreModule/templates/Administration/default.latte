@@ -1,0 +1,8 @@
+{block title}Web Administration{/block}
+{block description}Web administration.{/block}
+{block content}
+<p>Welcome to administration!</p>
+<p n:if="!$user->isInRole('admin')">You don't have administration privileges. Contact web administrator.</p>
+<h2 n:if="$user->isInRole('admin')"><a n:href=Article:editor>Add an article</a></h2>
+<h2><a n:href=Article:list>List articles</a></h2>
+<h2><a n:href=logout>Logout</a></h2>
